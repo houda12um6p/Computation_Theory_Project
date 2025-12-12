@@ -1,0 +1,63 @@
+Clinical Validation Samples Summary
+==================================================
+
+Sample  1: ST Elevation              Encoding: ABCDefGHIJ
+           Hotspots: R-wave peak, S-wave
+
+Sample  2: Supraventricular          Encoding: AbCDEfgHIJ
+           Hotspots: P-wave peak, S-wave, ST segment
+
+Sample  3: Wide QRS (BBB)            Encoding: abcdefghij
+           Hotspots: P-wave onset, P-wave peak, PR segment, R-wave onset, R-wave peak, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
+Sample  4: Ventricular Ectopy        Encoding: aBcdEfghij
+           Hotspots: P-wave onset, PR segment, R-wave onset, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
+Sample  5: Unknown/Artifact          Encoding: abcdEfghij
+           Hotspots: P-wave onset, P-wave peak, PR segment, R-wave onset, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
+Sample  6: ST Elevation              Encoding: ABCDefGhIJ
+           Hotspots: R-wave peak, S-wave, T-wave onset
+
+Sample  7: Ventricular Ectopy        Encoding: aBcdefghij
+           Hotspots: P-wave onset, PR segment, R-wave onset, R-wave peak, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
+Sample  8: Unknown/Artifact          Encoding: abcdEfghij
+           Hotspots: P-wave onset, P-wave peak, PR segment, R-wave onset, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
+Sample  9: Supraventricular          Encoding: AbCDefgHIJ
+           Hotspots: P-wave peak, R-wave peak, S-wave, ST segment
+
+Sample 10: Wide QRS (BBB)            Encoding: abcdefghij
+           Hotspots: P-wave onset, P-wave peak, PR segment, R-wave onset, R-wave peak, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
+Sample 11: ST Elevation              Encoding: ABCDefGHIJ
+           Hotspots: R-wave peak, S-wave
+
+Sample 12: T-wave Inversion          Encoding: abcDefgHij
+           Hotspots: P-wave onset, P-wave peak, PR segment, R-wave peak, S-wave, ST segment, T-wave peak, T-wave end
+
+Sample 13: Supraventricular          Encoding: AbCDefgHIJ
+           Hotspots: P-wave peak, R-wave peak, S-wave, ST segment
+
+Sample 14: Ventricular Ectopy        Encoding: aBcdEfghij
+           Hotspots: P-wave onset, PR segment, R-wave onset, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
+Sample 15: Supraventricular          Encoding: AbCDEfgHIJ
+           Hotspots: P-wave peak, S-wave, ST segment
+
+Sample 16: T-wave Inversion          Encoding: abcDefgHij
+           Hotspots: P-wave onset, P-wave peak, PR segment, R-wave peak, S-wave, ST segment, T-wave peak, T-wave end
+
+Sample 17: Wide QRS (BBB)            Encoding: abcdefghij
+           Hotspots: P-wave onset, P-wave peak, PR segment, R-wave onset, R-wave peak, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
+Sample 18: Ventricular Ectopy        Encoding: aBcdEfghij
+           Hotspots: P-wave onset, PR segment, R-wave onset, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
+Sample 19: Unknown/Artifact          Encoding: abcdEfghij
+           Hotspots: P-wave onset, P-wave peak, PR segment, R-wave onset, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
+Sample 20: T-wave Inversion          Encoding: abcdefghij
+           Hotspots: P-wave onset, P-wave peak, PR segment, R-wave onset, R-wave peak, S-wave, ST segment, T-wave onset, T-wave peak, T-wave end
+
