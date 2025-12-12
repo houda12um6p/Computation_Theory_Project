@@ -9,7 +9,7 @@ This document explains the algorithms we used in our ECG anomaly detection syste
 1. [Overview]
 2. [Symbolic Encoding Algorithm]
 3. [Grammar Inference Algorithm]
-4. [PDA-Based Detection Algorithm]
+4. [DFA-Based Detection Algorithm]
 5. [Hotspot Analysis Algorithm]
 6. [Complexity Analysis]
 
@@ -181,25 +181,23 @@ While our current patterns could be recognized by a finite automaton, the CFG fr
 
 1. **Extensibility**: Future enhancements can capture nested patterns
 2. **Formal Foundation**: Enables rigorous theoretical analysis
-3. **Stack-Based Recognition**: PDA can track context across segments
+3. **Efficient Recognition**: DFA provides O(n) time complexity for pattern matching
 4. **Academic Value**: Shows formal language theory application
 
 
-## PDA-Based Detection Algorithm
+## DFA-Based Detection Algorithm
 
 ### Purpose
 
-Use a Pushdown Automaton to recognize whether a sequence belongs to the learned grammar.
+Use a Deterministic Finite Automaton to recognize whether a sequence belongs to the learned grammar.
 
-### Formal PDA Definition
+### Formal DFA Definition
 
-M = (Q, Sigma, Gamma, delta, q0, Z0, F) where:
+M = (Q, Sigma, delta, q0, F) where:
 - Q = {q0, q1, ..., qn, q_accept, q_reject}
 - Sigma = Terminal alphabet
-- Gamma = Stack alphabet
 - delta = Transition function
 - q0 = Initial state
-- Z0 = Initial stack symbol
 - F = Accepting states
 
 ### Algorithm 3: Anomaly Detection
@@ -224,7 +222,7 @@ OUTPUT: (is_normal, label, details)
    b. RETURN (False, "ANOMALY", {hotspots: hotspots})
 ```
 
-### PDA Transition Diagram
+### DFA Transition Diagram
 
 ```
                     +-----------+
@@ -232,7 +230,7 @@ OUTPUT: (is_normal, label, details)
                     |    q_0    |
                     +-----+-----+
                           |
-                          | push(Z_0)
+                          | read first symbol
                           v
                     +-----+-----+
                     |  PROCESS  |
@@ -361,15 +359,15 @@ Fusion Beat (Class 3):
 2. Detection accepts only patterns in accepted_patterns
 3. Therefore, L(G) = {normal training patterns}
 
-### Theorem 2: PDA Recognition
+### Theorem 2: DFA Recognition
 
-*The PDA M recognizes exactly the language L(G) defined by grammar G.*
+*The DFA M recognizes exactly the language L(G) defined by grammar G.*
 
 **Proof Sketch:**
-1. PDA transitions mirror grammar production rules
-2. Stack tracks derivation progress
-3. Acceptance occurs iff complete derivation exists
-4. By CFG-PDA equivalence theorem, L(M) = L(G)
+1. DFA transitions mirror grammar production rules
+2. State tracks position in pattern
+3. Acceptance occurs iff pattern is in accepted set
+4. By construction, L(M) = L(G)
 
 ### Theorem 3: Detection Completeness
 

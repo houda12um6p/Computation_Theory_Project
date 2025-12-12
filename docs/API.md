@@ -10,7 +10,7 @@ This document provides the API documentation for our ECG anomaly detection syste
 
 1. [HeartbeatEncoder](#heartbeatencoder)
 2. [GrammarLearner](#grammarlearner)
-3. [PDADetector](#pdadetector)
+3. [DFADetector](#dfadetector)
 4. [Quick Start](#quick-start)
 
 ---
@@ -207,16 +207,16 @@ grammar.load("learned_grammar.json")
 
 ---
 
-## PDADetector
+## DFADetector
 
 **Module:** `src/anomaly_detector.py`
 
-Pushdown Automaton-based anomaly detector that uses the learned grammar.
+Deterministic Finite Automaton-based anomaly detector that uses the learned grammar.
 
 ### Class Definition
 
 ```python
-class PDADetector:
+class DFADetector:
     def __init__(self, grammar_learner: GrammarLearner)
 ```
 
@@ -339,7 +339,7 @@ import pandas as pd
 import numpy as np
 from src.encoder import HeartbeatEncoder
 from src.grammar_learner import GrammarLearner
-from src.anomaly_detector import PDADetector
+from src.anomaly_detector import DFADetector
 
 # 1. Load data
 train_df = pd.read_csv("data/raw/mitbih_train.csv", header=None)
@@ -365,7 +365,7 @@ grammar = GrammarLearner()
 grammar.fit(normal_sequences)
 
 # 5. Create detector and evaluate
-detector = PDADetector(grammar)
+detector = DFADetector(grammar)
 results = detector.evaluate(test_sequences, y_test.astype(int).tolist())
 
 print(f"Accuracy:  {results['accuracy']:.2%}")

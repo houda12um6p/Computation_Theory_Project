@@ -6,7 +6,7 @@ This example demonstrates the complete anomaly detection pipeline:
 1. Load data
 2. Encode heartbeats
 3. Learn grammar from normal patterns
-4. Detect anomalies using PDA
+4. Detect anomalies using DFA
 
 Course: Computational Theory - Fall 2025
 Institution: Mohammed VI Polytechnic University (UM6P)
@@ -28,7 +28,7 @@ except ImportError:
 
 from encoder import HeartbeatEncoder
 from grammar_learner import GrammarLearner
-from anomaly_detector import PDADetector
+from anomaly_detector import DFADetector
 
 
 def load_data(data_path):
@@ -52,7 +52,7 @@ def load_data(data_path):
 def main():
     print("=" * 70)
     print("DEMO: Complete Anomaly Detection Pipeline")
-    print("Using Context-Free Grammar and Pushdown Automaton")
+    print("Using Context-Free Grammar and Deterministic Finite Automaton")
     print("=" * 70)
 
     # Paths
@@ -111,11 +111,11 @@ def main():
 
     # Step 4: Create detector
     print("\n" + "=" * 70)
-    print("STEP 4: PDA-Based Detection")
+    print("STEP 4: DFA-Based Detection")
     print("=" * 70)
 
-    detector = PDADetector(grammar)
-    print("Pushdown Automaton detector created")
+    detector = DFADetector(grammar)
+    print("Deterministic Finite Automaton detector created")
 
     # Demonstrate individual detection
     print("\n--- Individual Detection Examples ---")
@@ -191,7 +191,7 @@ def main():
     print("  - This is expected: grammar-based detection is conservative")
     print("\nThe formal language approach provides:")
     print("  - Interpretable symbolic representation")
-    print("  - Theoretical foundations (CFG, PDA)")
+    print("  - Theoretical foundations (CFG, DFA)")
     print("  - Hotspot localization for anomalies")
 
 

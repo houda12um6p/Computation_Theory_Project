@@ -5,7 +5,7 @@ Detector that uses the learned grammar to find abnormal heartbeats.
 
 from typing import Tuple, List, Dict
 
-class PDADetector:
+class DFADetector:
     """
     Detector that checks if heartbeat patterns match the learned grammar.
 
@@ -104,7 +104,7 @@ class PDADetector:
 
         report = f"""
 ================================================================
-       PDA ANOMALY DETECTOR - EVALUATION REPORT
+       DFA ANOMALY DETECTOR - EVALUATION REPORT
 ================================================================
 
 Confusion Matrix:

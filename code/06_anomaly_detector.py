@@ -5,13 +5,13 @@ RESULTS_PATH = "../results/"
 
 print("=" * 50)
 print("BUILDING ANOMALY DETECTOR")
-print("Pushdown Automaton for ECG Classification")
+print("Deterministic Finite Automaton for ECG Classification")
 print("=" * 50)
 
 class ECGAnomalyDetector:
     """
     Anomaly detector based on learned grammar.
-    Works like a PDA: accepts sequences in the grammar, rejects others.
+    Works like a DFA: accepts sequences in the grammar, rejects others.
     """
 
     def __init__(self, grammar_path):

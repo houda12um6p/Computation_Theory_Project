@@ -22,7 +22,7 @@ def print_subheader(text):
 def main():
     print_header("ECG ANOMALY DETECTION USING GRAMMAR INFERENCE")
     print("Formal Model: Context-Free Grammar (CFG)")
-    print("Recognition: Pushdown Automaton (PDA)")
+    print("Recognition: Deterministic Finite Automaton (DFA)")
     print("-" * 70)
 
     # Change to code directory

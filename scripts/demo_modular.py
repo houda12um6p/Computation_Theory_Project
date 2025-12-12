@@ -16,7 +16,7 @@ import numpy as np
 
 from encoder import HeartbeatEncoder
 from grammar_learner import GrammarLearner
-from anomaly_detector import PDADetector
+from anomaly_detector import DFADetector
 
 def main():
     print("=" * 60)
@@ -64,8 +64,8 @@ def main():
     print(grammar.get_formal_definition())
 
     # Step 3: Create detector and evaluate
-    print("\n[4] Creating PDA detector and evaluating...")
-    detector = PDADetector(grammar)
+    print("\n[4] Creating DFA detector and evaluating...")
+    detector = DFADetector(grammar)
 
     # Evaluate
     results = detector.evaluate(test_sequences, y_test.astype(int).tolist())

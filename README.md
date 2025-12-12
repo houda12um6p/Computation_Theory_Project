@@ -5,6 +5,8 @@
 
 **Authors:** Houda TOUDALI, Aya BENJELLOUN, Nour El Houda El IAMANI
 
+**Repository:** [https://github.com/houda12um6p/Computation_Theory_Project](https://github.com/houda12um6p/Computation_Theory_Project)
+
 ---
 
 ## Overview
@@ -17,7 +19,7 @@ Instead of using machine learning, we:
 
 1. Encode ECG signals as symbolic sequences using z-score normalization
 2. Learn a Context-Free Grammar (CFG) from normal heartbeats
-3. Detect anomalies using a Pushdown Automaton (PDA) recognizer
+3. Detect anomalies using a Deterministic Finite Automaton (DFA) recognizer
 
 ### Research Question
 
@@ -56,7 +58,7 @@ Our goal was to see if we could learn what normal heartbeats look like using a g
 ```python
 from src.encoder import HeartbeatEncoder
 from src.grammar_learner import GrammarLearner
-from src.anomaly_detector import PDADetector
+from src.anomaly_detector import DFADetector
 
 # 1. Encode heartbeats
 encoder = HeartbeatEncoder(n_segments=10, threshold=1.75)
@@ -68,7 +70,7 @@ grammar = GrammarLearner()
 grammar.fit(normal_sequences)
 
 # 3. Detect anomalies
-detector = PDADetector(grammar)
+detector = DFADetector(grammar)
 is_normal, label, details = detector.detect(sequence)
 ```
 
@@ -107,7 +109,7 @@ ecg_project/
 |-- src/                       # Main source code
 |   |-- encoder.py             # HeartbeatEncoder class
 |   |-- grammar_learner.py     # GrammarLearner class
-|   |-- anomaly_detector.py    # PDADetector class
+|   |-- anomaly_detector.py    # DFADetector class
 |
 |-- code/                      # Analysis scripts (run in order)
 |   |-- 01_verify_data.py      # Load and verify data
@@ -158,8 +160,10 @@ ecg_project/
 
 Each heartbeat (187 samples) is divided into 10 segments. For each segment:
 - Compute z-score relative to normal heartbeat statistics
-- Assign UPPERCASE (A-J) if within threshold (normal)
-- Assign lowercase (a-j) if beyond threshold (abnormal)
+- Assign UPPERCASE (A-J) if z-score < θ (normal)
+- Assign lowercase (a-j) if z-score ≥ θ (abnormal)
+
+We use threshold θ = 1.75, selected for optimal precision in clinical screening.
 
 ```
 Input:  [0.1, 0.3, 0.8, 1.0, 0.9, ...] (187 values)
@@ -178,9 +182,11 @@ G = (V, Sigma, R, S) where:
   S = Start symbol
 ```
 
-### Step 3: PDA-Based Detection
+The dominant pattern `ABCDEFGHIJ` (all segments normal) covers 86.7% of normal heartbeats.
 
-A Pushdown Automaton recognizes sequences matching the grammar:
+### Step 3: DFA-Based Detection
+
+A Deterministic Finite Automaton (847 states) recognizes sequences matching the grammar:
 - ACCEPT (Normal): Sequence matches a learned pattern
 - REJECT (Anomaly): Sequence not in grammar + hotspot identification
 
@@ -208,11 +214,22 @@ A Pushdown Automaton recognizes sequences matching the grammar:
 
 Different arrhythmia types affect different cardiac segments:
 
-| Arrhythmia Type | Primary Hotspot | Clinical Interpretation |
-|-----------------|-----------------|------------------------|
-| Ventricular | Segments 1-4 | P-wave/early QRS affected |
-| Supraventricular | Segments 9-10 | T-wave region affected |
-| Fusion | Segments 4-7 | QRS complex affected |
+| Arrhythmia Type | Primary Hotspots | Abnormality Rate |
+|-----------------|------------------|------------------|
+| Ventricular | P-wave (31.1%), Q-wave (21.6%) | High |
+| Supraventricular | T-wave (14.0%), S-wave (11.7%) | Moderate |
+| Unknown | Q-wave (38.6%), P-wave (17.7%) | Very High |
+| Fusion | All segments | Low (2-4%) |
+
+These patterns are clinically meaningful: ventricular arrhythmias affect early depolarization (P, Q, R), while supraventricular arrhythmias affect repolarization (T-wave).
+
+### Clinical Validation
+
+Expert cardiologist review of 20 ECG samples showed:
+- **70% agreement** (partial or exact match) with system hotspots
+- **Cohen's Kappa κ = 0.42** (moderate inter-rater agreement)
+- System rated as useful for "secondary check / quality assurance"
+- Successfully detected ST-elevation emergencies and ventricular ectopy
 
 ---
 
@@ -236,9 +253,9 @@ grammar.fit(normal_sequences)
 print(grammar.get_formal_definition())
 ```
 
-**PDADetector** - Detect anomalies using learned grammar
+**DFADetector** - Detect anomalies using learned grammar
 ```python
-detector = PDADetector(grammar)
+detector = DFADetector(grammar)
 is_normal, label, details = detector.detect(sequence)
 results = detector.evaluate(sequences, labels)
 ```

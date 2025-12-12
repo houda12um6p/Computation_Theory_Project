@@ -19,7 +19,7 @@ import numpy as np
 
 from encoder import HeartbeatEncoder
 from grammar_learner import GrammarLearner
-from anomaly_detector import PDADetector
+from anomaly_detector import DFADetector
 
 
 # Configuration
@@ -49,7 +49,7 @@ def main():
     grammar.fit(normal_seqs)
 
     # 3. Create detector and evaluate
-    detector = PDADetector(grammar)
+    detector = DFADetector(grammar)
     results = detector.evaluate(test_seqs, y_test.astype(int).tolist())
 
     # Print results
